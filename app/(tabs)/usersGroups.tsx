@@ -1,17 +1,59 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Animated, Dimensions, TouchableWithoutFeedback, Image, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import Hamburger from './hamburger';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  TouchableOpacity,
+  Animated,
+  Dimensions,
+  TouchableWithoutFeedback,
+  Image,
+  ScrollView,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import Hamburger from "./hamburger";
+import { Link } from "expo-router";
 
 const mockData = [
-  { id: '1', name: 'hackyhackathons', photo: require('../../assets/groups/hackyhackathons.png'), target: 'Steps - 10,000 daily', description: 'This group should win' },
-  { id: '2', name: 'pog champions', photo: require('../../assets/groups/pogchampions.png'), target: 'Calories burned - 2000 daily', description: 'poggy woggy' },
-  { id: '3', name: 'pog frogs', photo: require('../../assets/groups/pogfrogs.png'), target: 'Steps - 5000 daily', description: 'frogs are pog' },
-  { id: '4', name: 'tree lovers <3', photo: require('../../assets/groups/treelovers.png'), target: 'Calories burned - 2000 daily', description: 'SAVE THE TREES >:(' },
-  { id: '5', name: 'brainrot', photo: require('../../assets/groups/brainrot.png'), target: 'Flights climbed - 5 daily', description: 'skibidi what the sigma' },
+  {
+    id: "1",
+    name: "hackyhackathons",
+    photo: require("../../assets/groups/hackyhackathons.png"),
+    target: "Steps - 10,000 daily",
+    description: "This group should win",
+  },
+  {
+    id: "2",
+    name: "pog champions",
+    photo: require("../../assets/groups/pogchampions.png"),
+    target: "Calories burned - 2000 daily",
+    description: "poggy woggy",
+  },
+  {
+    id: "3",
+    name: "pog frogs",
+    photo: require("../../assets/groups/pogfrogs.png"),
+    target: "Steps - 5000 daily",
+    description: "frogs are pog",
+  },
+  {
+    id: "4",
+    name: "tree lovers <3",
+    photo: require("../../assets/groups/treelovers.png"),
+    target: "Calories burned - 2000 daily",
+    description: "SAVE THE TREES >:(",
+  },
+  {
+    id: "5",
+    name: "brainrot",
+    photo: require("../../assets/groups/brainrot.png"),
+    target: "Flights climbed - 5 daily",
+    description: "skibidi what the sigma",
+  },
 ];
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 type ToggleDrawerType = () => void;
 
@@ -35,12 +77,21 @@ export default function usersGroups() {
     return (
       <ScrollView contentContainerStyle={styles.progressContainer}>
         {mockData.map((group, index) => (
-          <View key={group.id} style={[styles.groupContainer, index === 0 && { marginTop: 60 }]}>
+          <View
+            key={group.id}
+            style={[styles.groupContainer, index === 0 && { marginTop: 60 }]}
+          >
             <View style={styles.groupHeader}>
               <Image source={group.photo} style={styles.groupPhoto} />
               <Text style={styles.groupName}>{group.name}</Text>
               <TouchableOpacity onPress={() => toggleGroupDetails(group.id)}>
-                <Ionicons name={expandedGroup === group.id ? "chevron-up" : "chevron-down"} size={24} color="black" />
+                <Ionicons
+                  name={
+                    expandedGroup === group.id ? "chevron-up" : "chevron-down"
+                  }
+                  size={24}
+                  color="black"
+                />
               </TouchableOpacity>
             </View>
             {expandedGroup === group.id && (
@@ -68,13 +119,20 @@ export default function usersGroups() {
     <View style={styles.appContainer}>
       <SafeAreaView style={styles.container}>
         <TouchableOpacity onPress={toggleDrawer}>
-          <Ionicons name="menu" size={24} color="black" style={styles.menuIcon} />
+          <Ionicons
+            name="menu"
+            size={24}
+            color="black"
+            style={styles.menuIcon}
+          />
         </TouchableOpacity>
         <View style={styles.content}>
           <Text style={styles.title}>Your groups</Text>
-          <TouchableOpacity style={styles.addCircleIconContainer}>
-            <Ionicons name="add-circle" size={24} color="black" />
-          </TouchableOpacity>
+          <Link href="/makeGroup" asChild>
+            <TouchableOpacity style={styles.addCircleIconContainer}>
+              <Ionicons name="add-circle" size={24} color="black" />
+            </TouchableOpacity>
+          </Link>
           {renderContent()}
         </View>
       </SafeAreaView>
@@ -97,59 +155,59 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#75BED4',
+    backgroundColor: "#75BED4",
   },
   menuIcon: {
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     margin: 10,
   },
   content: {
     flex: 1,
-    backgroundColor: '#F2F2F2',
+    backgroundColor: "#F2F2F2",
     margin: 20,
     borderRadius: 10,
     padding: 20,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    position: 'relative',
+    justifyContent: "flex-start",
+    alignItems: "center",
+    position: "relative",
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    position: 'absolute',
+    fontWeight: "bold",
+    position: "absolute",
     top: 20,
     left: 20,
   },
   progressContainer: {
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    width: '100%',
+    alignItems: "center",
+    justifyContent: "flex-start",
+    width: "100%",
   },
   overlay: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     zIndex: 999,
   },
   drawerOverlay: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     width: width * 0.75,
-    height: '100%',
+    height: "100%",
     zIndex: 1000,
     elevation: 5,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
   },
   groupContainer: {
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
     marginVertical: 20,
-    width: '100%',
+    width: "100%",
     paddingHorizontal: 10,
   },
   groupPhoto: {
@@ -160,62 +218,62 @@ const styles = StyleSheet.create({
   },
   groupDetails: {
     flex: 1,
-    width: '100%',
+    width: "100%",
   },
   groupHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
   },
   groupName: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     flex: 1,
     marginLeft: 10,
   },
   groupExtraDetails: {
     marginTop: 10,
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
     width: 300,
   },
   groupTarget: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   targetBox: {
-    backgroundColor: '#E0E0E0',
+    backgroundColor: "#E0E0E0",
     padding: 10,
     borderRadius: 5,
     marginTop: 5,
-    width: '100%'
+    width: "100%",
   },
   groupDescriptionLabel: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 10,
   },
   descriptionBox: {
-    backgroundColor: '#E0E0E0',
+    backgroundColor: "#E0E0E0",
     padding: 10,
     borderRadius: 5,
     marginTop: 5,
-    width: '100%',
+    width: "100%",
   },
   groupPageButton: {
-    backgroundColor: '#75BED4',
+    backgroundColor: "#75BED4",
     padding: 10,
     borderRadius: 5,
     marginTop: 10,
-    alignSelf: 'center',
-    alignContent: 'center',
+    alignSelf: "center",
+    alignContent: "center",
   },
   groupPageButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
   addCircleIconContainer: {
-    position: 'absolute',
+    position: "absolute",
     top: 25,
     right: 20,
     zIndex: 1,
