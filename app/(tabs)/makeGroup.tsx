@@ -15,6 +15,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import Hamburger from "./hamburger";
 import DropDownPicker from "react-native-dropdown-picker";
+import { Link } from "expo-router";
 const { width } = Dimensions.get("window");
 
 type ToggleDrawerType = () => void;
@@ -110,12 +111,15 @@ export default function Home() {
                 style={styles.toggle}
                 trackColor={{ true: "#75BED4" }}
                 onValueChange={setIsPrivate}
+                value={isPrivate}
               ></Switch>
               <Text>Private Group</Text>
             </View>
-            <TouchableOpacity style={styles.createGroup}>
-              <Text style={styles.buttonText}>Create Group</Text>
-            </TouchableOpacity>
+            <Link href="/usersGroups" asChild>
+              <TouchableOpacity style={styles.createGroup}>
+                <Text style={styles.buttonText}>Create Group</Text>
+              </TouchableOpacity>
+            </Link>
           </ScrollView>
         </View>
       </SafeAreaView>
