@@ -23,7 +23,7 @@ export default function Login() {
         <Link href="/home" asChild>
           <Pressable>
             <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Sign In→</Text>
+              <Text style={styles.buttonText}>Sign In →</Text>
             </TouchableOpacity>
           </Pressable>
         </Link>
@@ -82,8 +82,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#4fc3f7',
     padding: 10,
     borderRadius: 10,
-    justifyContent: 'flex-end',
-    flexDirection: 'row',
     width: '50%',
     marginVertical: 10,
   },
