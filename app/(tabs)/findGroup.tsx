@@ -4,8 +4,8 @@ import { Ionicons } from '@expo/vector-icons';
 import Hamburger from './hamburger';
 
 const mockData = [
-  { id: '1', name: 'raccoons', photo: require('../../assets/groups/raccoons.png'), target: 'Steps', description: 'I love racoons' },
-  { id: '2', name: 'UNSW', photo: require('../../assets/groups/unsw.png'), target: 'Calories', description: 'This group is for students from the University of New South Wales!' }
+  { id: '1', name: 'raccoons', photo: require('../../assets/groups/raccoons.png'), target: 'Steps - 10,000 daily', description: 'I love racoons' },
+  { id: '2', name: 'UNSW', photo: require('../../assets/groups/unsw.png'), target: 'Calories burned - 1000 daily', description: 'This group is for students from the University of New South Wales!' }
 ];
 
 const { width } = Dimensions.get('window');

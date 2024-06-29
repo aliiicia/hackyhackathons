@@ -4,11 +4,11 @@ import { Ionicons } from '@expo/vector-icons';
 import Hamburger from './hamburger';
 
 const mockData = [
-  { id: '1', name: 'hackyhackathons', photo: require('../../assets/groups/hackyhackathons.png'), target: 'Steps', description: 'This group should win' },
-  { id: '2', name: 'pog champions', photo: require('../../assets/groups/pogchampions.png'), target: 'Calories', description: 'poggy woggy' },
-  { id: '3', name: 'pog frogs', photo: require('../../assets/groups/pogfrogs.png'), target: 'Steps', description: 'frogs are pog' },
-  { id: '4', name: 'tree lovers <3', photo: require('../../assets/groups/treelovers.png'), target: 'Calories', description: 'SAVE THE TREES >:(' },
-  { id: '5', name: 'brainrot', photo: require('../../assets/groups/brainrot.png'), target: 'Steps', description: 'skibidi what the sigma' },
+  { id: '1', name: 'hackyhackathons', photo: require('../../assets/groups/hackyhackathons.png'), target: 'Steps - 10,000 daily', description: 'This group should win' },
+  { id: '2', name: 'pog champions', photo: require('../../assets/groups/pogchampions.png'), target: 'Calories burned - 2000 daily', description: 'poggy woggy' },
+  { id: '3', name: 'pog frogs', photo: require('../../assets/groups/pogfrogs.png'), target: 'Steps - 5000 daily', description: 'frogs are pog' },
+  { id: '4', name: 'tree lovers <3', photo: require('../../assets/groups/treelovers.png'), target: 'Calories burned - 2000 daily', description: 'SAVE THE TREES >:(' },
+  { id: '5', name: 'brainrot', photo: require('../../assets/groups/brainrot.png'), target: 'Flights climbed - 5 daily', description: 'skibidi what the sigma' },
 ];
 
 const { width } = Dimensions.get('window');
