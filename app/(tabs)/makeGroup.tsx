@@ -5,26 +5,19 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
-  Animated,
   Dimensions,
-  TouchableWithoutFeedback,
   TextInput,
   Switch,
   ScrollView,
+  Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import Hamburger from "./hamburger";
 import DropDownPicker from "react-native-dropdown-picker";
 import { Link } from "expo-router";
+import * as ImagePicker from "expo-image-picker";
 const { width } = Dimensions.get("window");
 
-type ToggleDrawerType = () => void;
-
 export default function Home() {
-  const [drawerVisible, setDrawerVisible] = useState(false);
-  const toggleDrawer: ToggleDrawerType = () => {
-    setDrawerVisible(!drawerVisible);
-  };
   const [themeOpen, setThemeOpen] = useState(false);
   const [currentTheme, setCurrentTheme] = useState(null);
   const [theme, setTheme] = useState([
@@ -41,25 +34,46 @@ export default function Home() {
     { label: "Calories", value: "calories" },
   ]);
 
-  const [isPrivate, setIsPrivate] = useState(false);
-  const closeDrawer = () => {
-    setDrawerVisible(false);
-  };
+  const [frequencyOpen, setFrequencyOpen] = useState(false);
+  const [currentFrequency, setCurrentFrequency] = useState(null);
+  const [frequency, setFrequency] = useState([
+    { label: "Daily", value: "daily" },
+    { label: "Weekly", value: "weekly" },
+    { label: "Monthly", value: "monthly" },
+  ]);
 
+  const pickImage = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (status !== "granted") {
+      // If permission is denied, show an alert
+      Alert.alert("Permission Denied");
+    } else {
+      // Launch the image library and get
+      // the selected image
+      const result = await ImagePicker.launchImageLibraryAsync();
+    }
+  };
+  const [isPrivate, setIsPrivate] = useState(false);
   return (
     <View style={styles.appContainer}>
       <SafeAreaView style={styles.container}>
-        <TouchableOpacity onPress={toggleDrawer}>
-          <Ionicons
-            name="menu"
-            size={24}
-            color="black"
-            style={styles.menuIcon}
-          />
-        </TouchableOpacity>
+        <Link href="/usersGroups" asChild>
+          <TouchableOpacity>
+            <Ionicons
+              name="chevron-back-outline"
+              size={24}
+              color="black"
+              style={styles.menuIcon}
+            />
+          </TouchableOpacity>
+        </Link>
         <View style={styles.content}>
           <Text style={styles.groupName}>Make Group</Text>
           <ScrollView contentContainerStyle={{ justifyContent: "flex-start" }}>
+            <TouchableOpacity style={styles.circlebutton} onPress={pickImage}>
+              <Text style={styles.circlebuttonText}>Profile Picture</Text>
+            </TouchableOpacity>
             <View>
               <Text style={styles.title}>Group Name</Text>
               <TextInput style={styles.input} placeholderTextColor="#7d7d7d" />
@@ -102,6 +116,19 @@ export default function Home() {
                 style={styles.picker}
               />
             </View>
+            <View>
+              <Text style={styles.title}>Frequency</Text>
+              <DropDownPicker
+                open={frequencyOpen}
+                value={currentFrequency}
+                items={frequency}
+                setOpen={setFrequencyOpen}
+                setValue={setCurrentFrequency}
+                setItems={setFrequency}
+                listMode="MODAL"
+                style={styles.picker}
+              />
+            </View>
             <Link href="/addMembers" asChild>
               <TouchableOpacity style={styles.addMembers}>
                 <Text style={styles.buttonText}>Add Members</Text>
@@ -125,15 +152,6 @@ export default function Home() {
           </ScrollView>
         </View>
       </SafeAreaView>
-      {drawerVisible && (
-        <TouchableWithoutFeedback onPress={closeDrawer}>
-          <View style={styles.overlay}>
-            <Animated.View style={styles.drawerOverlay}>
-              <Hamburger />
-            </Animated.View>
-          </View>
-        </TouchableWithoutFeedback>
-      )}
     </View>
   );
 }
@@ -240,5 +258,20 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
+  },
+  circlebutton: {
+    backgroundColor: "#6ca0dc",
+    height: 150,
+    width: 150,
+    padding: 10,
+    borderRadius: 150,
+    marginVertical: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+  },
+  circlebuttonText: {
+    color: "#fff",
+    fontSize: 18,
   },
 });

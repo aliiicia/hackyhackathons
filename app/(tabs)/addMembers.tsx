@@ -5,43 +5,45 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
-  Animated,
   Dimensions,
-  TouchableWithoutFeedback,
   Image,
+  TextInput,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import Hamburger from "./hamburger";
 import Checkbox from "expo-checkbox";
+import { Link } from "expo-router";
+
+type User = {
+  id: string;
+  name: string;
+  selected: boolean;
+  photo: any;
+};
 
 const mockData = [
   {
     id: "1",
     name: "Adrian",
-    streak: 15,
+    selected: false,
     photo: require("../../assets/pfp/adrian.png"),
-    description: "three sum pro",
   },
   {
     id: "2",
     name: "Daniel",
-    streak: 12,
+    selected: false,
     photo: require("../../assets/pfp/daniel.png"),
-    description: "Peaked masters in tft",
   },
   {
     id: "3",
     name: "Jamal",
-    streak: 7,
+    selected: false,
     photo: require("../../assets/pfp/jamal.png"),
-    description: "Recovering valorant addict ",
   },
   {
     id: "5",
     name: "Alicia",
-    streak: 20,
+    selected: false,
     photo: require("../../assets/pfp/alicia.png"),
-    description: "I love tartare",
   },
 ];
 
@@ -50,51 +52,73 @@ const { width } = Dimensions.get("window");
 type ToggleDrawerType = () => void;
 
 export default function FriendsList() {
-  const [drawerVisible, setDrawerVisible] = useState(false);
-  const toggleDrawer: ToggleDrawerType = () => {
-    setDrawerVisible(!drawerVisible);
-  };
+  const [searchText, setSearchText] = useState("");
+  const [users, setUsers] = useState<User[]>(mockData);
 
-  const closeDrawer = () => {
-    setDrawerVisible(false);
+  const handleChange = (id: string) => {
+    let temp = users.map((user) => {
+      if (id == user.id) {
+        return { ...user, selected: !user.selected };
+      }
+      return user;
+    });
+    setUsers(temp);
   };
 
   return (
     <View style={styles.appContainer}>
       <SafeAreaView style={styles.container}>
-        <TouchableOpacity onPress={toggleDrawer}>
-          <Ionicons
-            name="menu"
-            size={24}
-            color="black"
-            style={styles.menuIcon}
-          />
-        </TouchableOpacity>
-        <View style={styles.content}>
-          <Text style={styles.groupName}>Your Friends</Text>
-          <TouchableOpacity style={styles.addCircleIconContainer}>
-            <Ionicons name="add-circle" size={24} color="black" />
+        <Link href="/makeGroup" asChild>
+          <TouchableOpacity>
+            <Ionicons
+              name="chevron-back-outline"
+              size={24}
+              color="black"
+              style={styles.menuIcon}
+            />
           </TouchableOpacity>
-          {mockData.map((user) => (
-            <View key={user.id} style={styles.userContainer}>
-              <Image source={user.photo} style={styles.userPhoto} />
-              <View style={styles.userDetails}>
-                <Text style={styles.userName}>{user.name}</Text>
-                <Checkbox />
+        </Link>
+        <View style={styles.content}>
+          <Text style={styles.groupName}>Add Members</Text>
+          <View style={styles.search}>
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Search for user"
+              placeholderTextColor="black"
+              value={searchText}
+              onChangeText={setSearchText}
+            />
+            <Ionicons
+              name="search"
+              size={24}
+              color="black"
+              style={styles.searchIcon}
+            />
+          </View>
+          {users
+            .filter((user) => user.name.match(searchText))
+            .map((user) => (
+              <View key={user.id} style={styles.userContainer}>
+                <Image source={user.photo} style={styles.userPhoto} />
+                <View style={styles.userDetails}>
+                  <Text style={styles.userName}>{user.name}</Text>
+                  <Checkbox
+                    color="#8F619F"
+                    value={user.selected}
+                    onValueChange={() => {
+                      handleChange(user.id);
+                    }}
+                  />
+                </View>
               </View>
-            </View>
-          ))}
+            ))}
+          <Link href="/makeGroup" asChild>
+            <TouchableOpacity style={styles.addMembers}>
+              <Text style={styles.buttonText}>Add</Text>
+            </TouchableOpacity>
+          </Link>
         </View>
       </SafeAreaView>
-      {drawerVisible && (
-        <TouchableWithoutFeedback onPress={closeDrawer}>
-          <View style={styles.overlay}>
-            <Animated.View style={styles.drawerOverlay}>
-              <Hamburger />
-            </Animated.View>
-          </View>
-        </TouchableWithoutFeedback>
-      )}
     </View>
   );
 }
@@ -119,7 +143,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 80,
     justifyContent: "flex-start",
-    alignItems: "center",
+    alignItems: "stretch",
     position: "relative",
   },
   groupName: {
@@ -180,5 +204,33 @@ const styles = StyleSheet.create({
     top: 25,
     right: 20,
     zIndex: 1,
+  },
+  addMembers: {
+    marginTop: 10,
+    backgroundColor: "#4EA6C2",
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    color: "black",
+  },
+  buttonText: {
+    textAlign: "center",
+    marginRight: 10,
+  },
+  search: {
+    backgroundColor: "#E0E0E0",
+    padding: 10,
+    borderRadius: 5,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  searchInput: {
+    flex: 1,
+    marginRight: 10,
+  },
+  searchIcon: {
+    marginLeft: 10,
   },
 });
