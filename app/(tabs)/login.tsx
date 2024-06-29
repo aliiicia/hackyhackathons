@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, View, TextInput, TouchableOpacity, StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, StyleSheet, TouchableWithoutFeedback, Keyboard, Pressable } from 'react-native';
+import { Link } from "expo-router";
 
 export default function Login() {
   return (
@@ -19,9 +20,13 @@ export default function Login() {
           placeholderTextColor="#7d7d7d"
           secureTextEntry
         />
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>→</Text>
-        </TouchableOpacity>
+        <Link href="/home" asChild>
+          <Pressable>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>Sign In→</Text>
+            </TouchableOpacity>
+          </Pressable>
+        </Link>
         <View style={styles.bottomTextContainer}>
           <Text style={styles.signUpText}>Don't have an account? <Text style={styles.signUpLink}>Sign up</Text></Text>
         </View>
