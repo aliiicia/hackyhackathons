@@ -35,10 +35,12 @@ const Hamburger = () => (
       <Ionicons name="search" size={30} color="black" />
       <Text style={styles.drawerItemText}>Find a Group</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.drawerItem}>
-      <Ionicons name="settings" size={30} color="black" />
-      <Text style={styles.drawerItemText}>Settings</Text>
-    </TouchableOpacity>
+    <Link href="/settings" asChild>
+      <TouchableOpacity style={styles.drawerItem}>
+        <Ionicons name="settings" size={30} color="black" />
+        <Text style={styles.drawerItemText}>Settings</Text>
+      </TouchableOpacity>
+    </Link>
   </View>
 );
 
