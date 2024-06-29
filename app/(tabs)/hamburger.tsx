@@ -31,10 +31,12 @@ const Hamburger = () => (
         <Text style={styles.drawerItemText}>Groups</Text>
       </TouchableOpacity>
     </Link>
-    <TouchableOpacity style={styles.drawerItem}>
-      <Ionicons name="search" size={30} color="black" />
-      <Text style={styles.drawerItemText}>Find a Group</Text>
-    </TouchableOpacity>
+    <Link href="/findGroup" asChild>
+      <TouchableOpacity style={styles.drawerItem}>
+        <Ionicons name="search" size={30} color="black" />
+        <Text style={styles.drawerItemText}>Find a Group</Text>
+      </TouchableOpacity>
+    </Link>
     <Link href="/settings" asChild>
       <TouchableOpacity style={styles.drawerItem}>
         <Ionicons name="settings" size={30} color="black" />

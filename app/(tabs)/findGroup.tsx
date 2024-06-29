@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Animated, Dimensions, TouchableWithoutFeedback, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Animated, Dimensions, TouchableWithoutFeedback, Image, ScrollView, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Hamburger from './hamburger';
 
 const mockData = [
-  { id: '1', name: 'hackyhackathons', photo: require('../../assets/groups/hackyhackathons.png'), target: 'Steps - 10,000 daily', description: 'This group should win' },
-  { id: '2', name: 'pog champions', photo: require('../../assets/groups/pogchampions.png'), target: 'Calories burned - 2000 daily', description: 'poggy woggy' },
-  { id: '3', name: 'pog frogs', photo: require('../../assets/groups/pogfrogs.png'), target: 'Steps - 5000 daily', description: 'frogs are pog' },
-  { id: '4', name: 'tree lovers <3', photo: require('../../assets/groups/treelovers.png'), target: 'Calories burned - 2000 daily', description: 'SAVE THE TREES >:(' },
-  { id: '5', name: 'brainrot', photo: require('../../assets/groups/brainrot.png'), target: 'Flights climbed - 5 daily', description: 'skibidi what the sigma' },
+  { id: '1', name: 'raccoons', photo: require('../../assets/groups/raccoons.png'), target: 'Steps - 10,000 daily', description: 'I love racoons' },
+  { id: '2', name: 'UNSW', photo: require('../../assets/groups/unsw.png'), target: 'Calories burned - 1000 daily', description: 'This group is for students from the University of New South Wales!' }
 ];
 
 const { width } = Dimensions.get('window');
@@ -18,6 +15,7 @@ type ToggleDrawerType = () => void;
 export default function usersGroups() {
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [expandedGroup, setExpandedGroup] = useState<string | null>(null);
+  const [searchText, setSearchText] = useState('');
 
   const toggleDrawer: ToggleDrawerType = () => {
     setDrawerVisible(!drawerVisible);
@@ -35,7 +33,7 @@ export default function usersGroups() {
     return (
       <ScrollView contentContainerStyle={styles.progressContainer}>
         {mockData.map((group, index) => (
-          <View key={group.id} style={[styles.groupContainer, index === 0 && { marginTop: 60 }]}>
+          <View key={group.id} style={[styles.groupContainer, index === 0 && { marginTop: 30 }]}>
             <View style={styles.groupHeader}>
               <Image source={group.photo} style={styles.groupPhoto} />
               <Text style={styles.groupName}>{group.name}</Text>
@@ -54,7 +52,7 @@ export default function usersGroups() {
                   <Text>{group.description}</Text>
                 </View>
                 <TouchableOpacity style={styles.groupPageButton}>
-                  <Text style={styles.groupPageButtonText}>Group Page</Text>
+                  <Text style={styles.groupPageButtonText}>Join Group</Text>
                 </TouchableOpacity>
               </View>
             )}
@@ -71,10 +69,20 @@ export default function usersGroups() {
           <Ionicons name="menu" size={24} color="black" style={styles.menuIcon} />
         </TouchableOpacity>
         <View style={styles.content}>
-          <Text style={styles.title}>Your groups</Text>
-          <TouchableOpacity style={styles.addCircleIconContainer}>
-            <Ionicons name="add-circle" size={24} color="black" />
+          <Text style={styles.title}>Find a group</Text>
+          <TouchableOpacity style={styles.filterIconContainer}>
+            <Ionicons name="filter" size={24} color="black" />
           </TouchableOpacity>
+          <View style={styles.search}>
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Enter a Group Code"
+              placeholderTextColor="black"
+              value={searchText}
+              onChangeText={setSearchText}
+            />
+            <Ionicons name="search" size={24} color="black" style={styles.searchIcon} />
+          </View>
           {renderContent()}
         </View>
       </SafeAreaView>
@@ -214,10 +222,27 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
-  addCircleIconContainer: {
+  filterIconContainer: {
     position: 'absolute',
-    top: 25,
+    top: 20,
     right: 20,
     zIndex: 1,
+  },
+  search: {
+    backgroundColor: '#E0E0E0',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 50,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  searchInput: {
+    flex: 1,
+    marginRight: 10,
+  },
+  searchIcon: {
+    marginLeft: 10,
   },
 });
