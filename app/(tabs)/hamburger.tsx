@@ -2,8 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-type ToggleDrawerType = () => void;
-
 const Hamburger = () => (
   <View style={styles.drawerContainer}>
     <View style={styles.drawerHeader}>

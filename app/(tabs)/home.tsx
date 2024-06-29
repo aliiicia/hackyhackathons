@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Animated, Dimensions, TouchableWithoutFeedback, Image } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Animated, Dimensions, TouchableWithoutFeedback, Image, NativeSyntheticEvent } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { CircularProgress } from 'react-native-circular-progress';
 import Hamburger from './hamburger';
@@ -61,7 +61,7 @@ export default function Home() {
           </TouchableOpacity>
           {mockData.map((user) => (
             <View key={user.id} style={styles.userContainer}>
-              <Image source={user.photo } style={styles.userPhoto} />
+              <Image source={user.photo} style={styles.userPhoto} />
               <View style={styles.userDetails}>
                 <Text style={styles.userName}>{user.name}</Text>
                 <ProgressBar
@@ -92,7 +92,7 @@ export default function Home() {
           <SegmentedControl
             values={['Home', 'Progress']}
             selectedIndex={selectedIndex}
-            onChange={(event) => {
+            onChange={(event: NativeSyntheticEvent<{ selectedSegmentIndex: number }>) => {
               setSelectedIndex(event.nativeEvent.selectedSegmentIndex);
             }}
             style={styles.segmentedControl}
