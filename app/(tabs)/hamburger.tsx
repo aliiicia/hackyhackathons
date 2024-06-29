@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Link } from "expo-router";
 
 type ToggleDrawerType = () => void;
 
@@ -30,10 +31,12 @@ const Hamburger = () => (
       <Ionicons name="search" size={30} color="black" />
       <Text style={styles.drawerItemText}>Find a Group</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.drawerItem}>
-      <Ionicons name="settings" size={30} color="black" />
-      <Text style={styles.drawerItemText}>Settings</Text>
-    </TouchableOpacity>
+    <Link href="/settings" asChild>
+      <TouchableOpacity style={styles.drawerItem}>
+        <Ionicons name="settings" size={30} color="black" />
+        <Text style={styles.drawerItemText}>Settings</Text>
+      </TouchableOpacity>
+    </Link>
   </View>
 );
 
