@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, TextInput, TouchableOpacity, StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { Link } from "expo-router";
 
 export default function Login() {
   return (
@@ -23,7 +24,10 @@ export default function Login() {
           <Text style={styles.buttonText}>→</Text>
         </TouchableOpacity>
         <View style={styles.bottomTextContainer}>
-          <Text style={styles.signUpText}>Don't have an account? <Text style={styles.signUpLink}>Sign up</Text></Text>
+          <Text style={styles.signUpText}>Don't have an account? </Text>
+          <Link href="/register">
+            <Text style={styles.signUpLink}>Sign up</Text> 
+          </Link>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -84,6 +88,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   bottomTextContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     position: 'absolute',
     bottom: 30,
   },
@@ -97,5 +103,7 @@ const styles = StyleSheet.create({
     textShadowColor: 'rgba(0, 163, 255, 0.75)',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 });
