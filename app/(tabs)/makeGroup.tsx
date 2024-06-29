@@ -9,12 +9,13 @@ import {
   Dimensions,
   TouchableWithoutFeedback,
   TextInput,
-  Button,
   Switch,
   ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Hamburger from "./hamburger";
+import { Picker } from "@react-native-picker/picker";
+import DropDownPicker from "react-native-dropdown-picker";
 const { width } = Dimensions.get("window");
 
 type ToggleDrawerType = () => void;
@@ -24,6 +25,21 @@ export default function Home() {
   const toggleDrawer: ToggleDrawerType = () => {
     setDrawerVisible(!drawerVisible);
   };
+  const [themeOpen, setThemeOpen] = useState(false);
+  const [currentTheme, setCurrentTheme] = useState(null);
+  const [theme, setTheme] = useState([
+    { label: "Tree", value: "tree" },
+    { label: "Dog", value: "dog" },
+    { label: "Cat", value: "cat" },
+    { label: "Toilet", value: "toilet" },
+  ]);
+
+  const [targetOpen, setTargetOpen] = useState(false);
+  const [currentTarget, setCurrentTarget] = useState(null);
+  const [target, setTarget] = useState([
+    { label: "Steps", value: "steps" },
+    { label: "Calories", value: "calories" },
+  ]);
 
   const closeDrawer = () => {
     setDrawerVisible(false);
@@ -58,6 +74,32 @@ export default function Home() {
             <View>
               <Text style={styles.title}>Steps Goal</Text>
               <TextInput style={styles.input} placeholderTextColor="#7d7d7d" />
+            </View>
+            <View>
+              <Text style={styles.title}>Theme</Text>
+              <DropDownPicker
+                open={themeOpen}
+                value={currentTheme}
+                items={theme}
+                setOpen={setThemeOpen}
+                setValue={setCurrentTheme}
+                setItems={setTheme}
+                listMode="MODAL"
+                style={styles.picker}
+              />
+            </View>
+            <View>
+              <Text style={styles.title}>Target</Text>
+              <DropDownPicker
+                open={targetOpen}
+                value={currentTarget}
+                items={target}
+                setOpen={setTargetOpen}
+                setValue={setCurrentTarget}
+                setItems={setTarget}
+                listMode="MODAL"
+                style={styles.picker}
+              />
             </View>
             <TouchableOpacity style={styles.addMembers}>
               <Text style={styles.buttonText}>Add Members</Text>
@@ -133,6 +175,12 @@ const styles = StyleSheet.create({
   toggle: {
     marginRight: 10,
   },
+  picker: {
+    marginTop: 10,
+    backgroundColor: "#D9D9D9",
+    borderColor: "#ccc",
+    borderRadius: 5,
+  },
   description: {
     height: 100,
     borderColor: "#ccc",
@@ -143,7 +191,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#D9D9D9",
   },
   addMembers: {
-    marginTop: 10,
+    marginTop: 20,
     backgroundColor: "#4EA6C2",
     borderRadius: 10,
     paddingHorizontal: 10,
