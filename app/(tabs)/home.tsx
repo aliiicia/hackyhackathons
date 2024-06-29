@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const GroupPage = () => {
+export default function Home() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -43,5 +43,3 @@ const styles = StyleSheet.create({
     left: 20,
   },
 });
-
-export default GroupPage;
