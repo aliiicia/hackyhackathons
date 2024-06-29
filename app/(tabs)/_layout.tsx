@@ -11,6 +11,7 @@ export default function RootLayout() {
       <Stack.Screen name="FriendsList" options={{ headerShown: false }} />
       <Stack.Screen name="findGroup" options={{ headerShown: false }} />
       <Stack.Screen name="makeGroup" options={{ headerShown: false }} />
+      <Stack.Screen name="addMembers" options={{ headerShown: false }} />
     </Stack>
   );
 }

@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Hamburger from "./hamburger";
+import Checkbox from "expo-checkbox";
 
 const mockData = [
   {
@@ -58,11 +59,6 @@ export default function FriendsList() {
     setDrawerVisible(false);
   };
 
-  const renderFireEmojis = (streak: number) => {
-    const numEmojis = Math.floor(streak / 10);
-    return "🔥".repeat(numEmojis);
-  };
-
   return (
     <View style={styles.appContainer}>
       <SafeAreaView style={styles.container}>
@@ -84,10 +80,7 @@ export default function FriendsList() {
               <Image source={user.photo} style={styles.userPhoto} />
               <View style={styles.userDetails}>
                 <Text style={styles.userName}>{user.name}</Text>
-                <Text style={styles.userDescription}>
-                  Streak: {user.streak} {renderFireEmojis(user.streak)}
-                </Text>
-                <Text style={styles.userDescription}>{user.description}</Text>
+                <Checkbox />
               </View>
             </View>
           ))}
@@ -170,6 +163,8 @@ const styles = StyleSheet.create({
   },
   userDetails: {
     flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   userName: {
     fontSize: 18,

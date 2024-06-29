@@ -102,10 +102,12 @@ export default function Home() {
                 style={styles.picker}
               />
             </View>
-            <TouchableOpacity style={styles.addMembers}>
-              <Text style={styles.buttonText}>Add Members</Text>
-              <Ionicons name="person-add-outline" size={20} color="black" />
-            </TouchableOpacity>
+            <Link href="/addMembers" asChild>
+              <TouchableOpacity style={styles.addMembers}>
+                <Text style={styles.buttonText}>Add Members</Text>
+                <Ionicons name="person-add-outline" size={20} color="black" />
+              </TouchableOpacity>
+            </Link>
             <View style={styles.toggleContainer}>
               <Switch
                 style={styles.toggle}
