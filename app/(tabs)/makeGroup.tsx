@@ -14,7 +14,6 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Hamburger from "./hamburger";
-import { Picker } from "@react-native-picker/picker";
 import DropDownPicker from "react-native-dropdown-picker";
 const { width } = Dimensions.get("window");
 
@@ -41,6 +40,7 @@ export default function Home() {
     { label: "Calories", value: "calories" },
   ]);
 
+  const [isPrivate, setIsPrivate] = useState(false);
   const closeDrawer = () => {
     setDrawerVisible(false);
   };
@@ -109,6 +109,7 @@ export default function Home() {
               <Switch
                 style={styles.toggle}
                 trackColor={{ true: "#75BED4" }}
+                onValueChange={setIsPrivate}
               ></Switch>
               <Text>Private Group</Text>
             </View>
