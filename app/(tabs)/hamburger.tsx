@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Link } from "expo-router";
 
 const Hamburger = () => (
   <View style={styles.drawerContainer}>
@@ -8,10 +9,12 @@ const Hamburger = () => (
       <View style={styles.profileCircle} />
       <Text style={styles.profileName}>Meredith</Text>
     </View>
-    <TouchableOpacity style={styles.drawerItem}>
-      <Ionicons name="home" size={30} color="black" />
-      <Text style={styles.drawerItemText}>Home</Text>
-    </TouchableOpacity>
+    <Link href="/home" asChild>
+      <TouchableOpacity style={styles.drawerItem}>
+        <Ionicons name="home" size={30} color="black" />
+        <Text style={styles.drawerItemText}>Home</Text>
+      </TouchableOpacity>
+    </Link>
     <TouchableOpacity style={styles.drawerItem}>
       <Ionicons name="people" size={30} color="black" />
       <Text style={styles.drawerItemText}>Friends</Text>
@@ -20,10 +23,12 @@ const Hamburger = () => (
       <Ionicons name="bar-chart" size={30} color="black" />
       <Text style={styles.drawerItemText}>Leaderboard</Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.drawerItem}>
-      <Ionicons name="people-circle" size={30} color="black" />
-      <Text style={styles.drawerItemText}>Groups</Text>
-    </TouchableOpacity>
+    <Link href="/usersGroups" asChild>
+      <TouchableOpacity style={styles.drawerItem}>
+        <Ionicons name="people-circle" size={30} color="black" />
+        <Text style={styles.drawerItemText}>Groups</Text>
+      </TouchableOpacity>
+    </Link>
     <TouchableOpacity style={styles.drawerItem}>
       <Ionicons name="search" size={30} color="black" />
       <Text style={styles.drawerItemText}>Find a Group</Text>
