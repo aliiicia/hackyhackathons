@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TextInput, TouchableOpacity, Dimensions, TouchableWithoutFeedback, Animated, Alert } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, TextInput, TouchableOpacity, Dimensions, TouchableWithoutFeedback, Animated, Alert, Keyboard } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from "expo-router";
 import * as ImagePicker from "expo-image-picker"; 
@@ -82,26 +82,28 @@ export default function Settings() {
   };
 
   return (
-    <View style={styles.appContainer}>
-        <SafeAreaView style={styles.container}>
-            <TouchableOpacity onPress={toggleDrawer}>
-                <Ionicons name="menu" size={24} color="black" style={styles.menuIcon} />
-            </TouchableOpacity>
-            <View style={styles.content}>
-                <Text style={styles.pageName}>Edit Profile</Text>
-                {renderContent()}
-            </View>
-        </SafeAreaView>
-        {drawerVisible && (
-        <TouchableWithoutFeedback onPress={closeDrawer}>
-            <View style={styles.overlay}>
-                <Animated.View style={styles.drawerOverlay}>
-                <Hamburger />
-                </Animated.View>
-            </View>
-        </TouchableWithoutFeedback>
-      )}
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.appContainer}>
+            <SafeAreaView style={styles.container}>
+                <TouchableOpacity onPress={toggleDrawer}>
+                    <Ionicons name="menu" size={24} color="black" style={styles.menuIcon} />
+                </TouchableOpacity>
+                <View style={styles.content}>
+                    <Text style={styles.pageName}>Edit Profile</Text>
+                    {renderContent()}
+                </View>
+            </SafeAreaView>
+            {drawerVisible && (
+            <TouchableWithoutFeedback onPress={closeDrawer}>
+                <View style={styles.overlay}>
+                    <Animated.View style={styles.drawerOverlay}>
+                    <Hamburger />
+                    </Animated.View>
+                </View>
+            </TouchableWithoutFeedback>
+        )}
+        </View>
+    </TouchableWithoutFeedback>
   );
 }
 
