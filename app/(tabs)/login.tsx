@@ -21,11 +21,9 @@ export default function Login() {
           secureTextEntry
         />
         <Link href="/home" asChild>
-          <Pressable>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Sign In →</Text>
-            </TouchableOpacity>
-          </Pressable>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Sign In →</Text>
+          </TouchableOpacity>
         </Link>
         <View style={styles.bottomTextContainer}>
           <Text style={styles.signUpText}>Don't have an account? </Text>
@@ -82,7 +80,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#4fc3f7',
     padding: 10,
     borderRadius: 10,
-    width: '50%',
     marginVertical: 10,
   },
   buttonText: {

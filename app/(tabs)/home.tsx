@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
+import { Text } from 'react-native';
+// import { Link } from "expo-router";
 
-const home = () => {
+export default function Home() {
   return (
-    <div>home</div>
-  )
+    <Text>Home</Text>
+  );
 }
-
-export default home;

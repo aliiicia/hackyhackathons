@@ -20,9 +20,11 @@ export default function Register() {
           placeholderTextColor="#7d7d7d"
           secureTextEntry
         />
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>→</Text>
-        </TouchableOpacity>
+        <Link href="/home" asChild>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Register →</Text>
+          </TouchableOpacity>
+        </Link>
         <View style={styles.bottomTextContainer}>
           <Text style={styles.signUpText}>Already have an account? </Text> 
           <Link href="/login">
@@ -78,9 +80,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#4fc3f7',
     padding: 10,
     borderRadius: 10,
-    justifyContent: 'flex-end',
-    flexDirection: 'row',
-    width: '50%',
     marginVertical: 10,
   },
   buttonText: {
