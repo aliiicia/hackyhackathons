@@ -15,7 +15,7 @@ const Hamburger = () => (
         <Text style={styles.drawerItemText}>Home</Text>
       </TouchableOpacity>
     </Link>
-    <Link href="/FriendsList" asChild>
+    <Link href="/friendsList" asChild>
       <TouchableOpacity style={styles.drawerItem}>
         <Ionicons name="people" size={30} color="black" />
         <Text style={styles.drawerItemText}>Friends</Text>
